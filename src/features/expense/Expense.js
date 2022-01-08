@@ -1,13 +1,17 @@
 import React, { useState,useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { ModalLoad } from '../../modals/ModalLoad';
 import { ModalSave } from '../../modals/ModalSave';
+
+
+
+
 
 
 import {
     add,
     remove,
     reset,
-    load,
 } from './expenseSlice';
 
 
@@ -43,10 +47,7 @@ import {
         
         dispatch(reset())
     }
-    const handleLoad = () =>{
-        const savedlist = JSON.parse(localStorage.getItem('expenselist'))
-        dispatch(load(savedlist))
-    }
+
     useEffect(() => {
         let totalsum = 0
         if (expenselist){
@@ -83,13 +84,12 @@ import {
             }
             
             <h4 className='h4'>Total Expense:  {total}</h4>
-            <button className="btn btn-info" onClick={handleLoad}>LOAD</button>
-            
-            <ModalSave>
+           
+            <ModalLoad></ModalLoad>
+            <ModalSave></ModalSave>
 
-            </ModalSave>
             <button className="btn btn-danger" onClick={handleReset}>RESET</button>
-        
+
   
                 
        
