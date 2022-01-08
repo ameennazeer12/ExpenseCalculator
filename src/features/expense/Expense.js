@@ -1,5 +1,8 @@
 import React, { useState,useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { ModalSave } from '../../modals/ModalSave';
+
+
 import {
     add,
     remove,
@@ -10,12 +13,18 @@ import {
 
 
 
+
  export const Expense = () => {
     const expenselist = useSelector(state => state.expense);
     const dispatch = useDispatch();
     const [desc, setDesc] = useState('')
     const [amt, setAmt] = useState(0)
     const [total, setTotal] = useState(0)
+   
+
+
+
+
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -29,9 +38,7 @@ import {
     const handleRemove = (id) => {
         dispatch(remove(id))
     }
-    const handleSave = () =>{
-        localStorage.setItem('expenselist', JSON.stringify(expenselist))
-    }
+
     const handleReset = () => {
         
         dispatch(reset())
@@ -47,6 +54,7 @@ import {
         }
         setTotal(totalsum)
     }, [expenselist])
+
 
     return (
         <div>
@@ -73,10 +81,21 @@ import {
             )
             })
             }
+            
             <h4 className='h4'>Total Expense:  {total}</h4>
             <button className="btn btn-info" onClick={handleLoad}>LOAD</button>
-            <button className='btn btn-primary m-3' onClick={handleSave}>SAVE</button>
+            
+            <ModalSave>
+
+            </ModalSave>
             <button className="btn btn-danger" onClick={handleReset}>RESET</button>
+        
+  
+                
+       
+            
+            
+ 
         </div>
     )
 }
